@@ -1,0 +1,641 @@
+ 
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+  
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#accordion" ).accordion({
+    	collapsible: true
+    });
+  } );
+  </script>
+  
+    <style>
+  #accordion-resizer {
+    width: 900px;
+  }
+  </style>
+  
+
+<style>
+#centerholder{
+	width: 1000px;
+	margin: 0 auto;
+
+}
+
+
+#SeitenNote, #SeitenNoteX{
+width: 40px;
+height: 12px;
+border: 1px solid black;
+float: left;
+text-align: center;
+font-size: 12px;
+}
+#SeitenTitel, #SeitenTitel0{
+width: 20px;
+height: 10px;
+float: left;
+font-size: 12px;
+text-align: center;
+}
+
+
+#SeitenNumber{
+width: 42px;
+height: 12px;
+float: left;
+font-size: 12px;
+text-align: center;
+}
+#NTabPush{
+width: 100px;
+}
+.TabName{
+font-size:40px;
+}
+</style>
+
+<!-- • • • • • • • • • • • • • •  -->
+
+<script>
+
+$( document ).ready(function() {
+    console.log( "ready!" );
+    
+	$( ".TabNote" ).click(function() {
+	//alert($( this ).html());
+  		if( $(this).is(':empty') ){
+  			$( this ).html("•");
+  		}
+  		else{
+  			$( this ).html("");
+  		}
+	});
+    
+    
+});
+
+</script>
+
+<!-- Tabulatoren -->
+
+<script>
+
+$( document ).ready(function() {
+
+
+	$( ".NTabClear" ).click(function() {
+	
+	//Clear all
+	
+		$(".TabNote").html("");
+		$(".TabName").html("Chords");
+		$(".TabNote").css("background-color", "white");
+	});
+	
+	$( ".SNC" ).click(function() {
+	
+	//Clear all
+	
+		var SL = $( this ).html();
+		
+		
+		
+		$(".TabNote").css("background-color", "white");
+		
+		
+		//alert(SL);
+		
+		
+		$("#SeitenNote[data-TabNumber=e" + SL + "]").css("background-color", "black");
+		$("#SeitenNote[data-TabNumber=h" + SL + "]").css("background-color", "black");
+		$("#SeitenNote[data-TabNumber=g" + SL + "]").css("background-color", "black");
+		$("#SeitenNote[data-TabNumber=D" + SL + "]").css("background-color", "black");
+		$("#SeitenNote[data-TabNumber=A" + SL + "]").css("background-color", "black");
+		$("#SeitenNote[data-TabNumber=E" + SL + "]").css("background-color", "black");
+	
+	});
+	
+	$( "#SeitenTitel0" ).click(function() {
+		$(".TabNote").css("background-color", "white");
+	});
+	
+	$( ".TabVar" ).click(function() {
+		var XVAR = $(this).attr("data-TabVar");
+	//alert(XVAR);
+		if($(".TabNote[data-TabNumber='" + XVAR + "1'] ").html() == ""){
+			$(".TabNote[data-TabNumber='" + XVAR + "1'] ").html("x");}
+		else{	$(".TabNote[data-TabNumber='" + XVAR + "1'] ").html("");}	
+		//$(".TabNote").html("x");
+	});
+
+	
+	//<div id="SeitenNoteX" class="TabVar" data-TabVar="e" style="border: none;">X</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    //alert( "ready!" );
+    
+    
+    //Akkord, e:"", h:"", g:"", D:"", A:"", E:"" 	(lenght : 7)
+    //Finger - , e:"", h:"", g:"", D:"", A:"", E:""  	+(lenght : 6)  = 13
+    	let NTab = [
+    	
+    	//Akkorde Main
+    	
+    		["Em", 0, 0, 0, 2, 2, 0 ], // Em [0]
+		["Am", 0, 1, 2, 2, 0, "x" ], // Am [1]
+		["Dm", 1, 3, 2, 0, "x", "x"], //Dm [2]
+		["G", 3, 0, 0, 0, 2, 3], //G
+		["C", 0, 1, 0, 2, 3, "x"], //C
+		
+		["E", 0, 0, 1, 2, 2, 0], //E
+		["A", 0, 2, 2, 2, 0, "x"], //A
+		["D", 2, 3, 2, 0, "x", "x"], //D
+		["G7", 1, 0, 0, 0, 2, 3], //G7
+		["C7", 0, 1, 3, 2, 3, "x"], //C7
+		
+		["E7", 0, 3, 1, 2, 2, 0], //E7
+		["A7", 0, 2, 0, 2, 0, "x"], //A7
+		["D7", 2, 1, 2, 0, "x", "x"], //D7
+		["Gvar", 3, 3, 0, 0, "x", 3], //Gvar
+		["B7", 2, 0, 2, 1, 2, "x"], //B7
+		
+	//Akkorde Grundlagen
+	
+		["B", 2, 4, 4, 4, 2, "x"], //	B
+		["F", 1, 1, 2, 3, 3, 1], //F
+		
+		["a", 0, 1, 2, 2, 0, "x"], //a
+		["b", 2, 3, 4, 4, 1, "x"], //b
+		["c", 3, 4, 5, 5, 3, "x"], //c
+		["d", 1, 3, 2, 0, "x", "x"], //d
+		["e", 0, 0, 0, 2, 2, 0], //e
+		["f", 1, 1, 1, 3, 3, 1], //f
+		["g", 3, 3, 3, 5, 5, 3], //g
+		
+	//Akkorde Geordnet
+		//major
+		["Cmajor", 0, 1, 0, 2, 3, "x"], //Cmajor
+		["Dmajor", 2, 3, 2, 0, "x", "x"], //Dmajor
+		["Emajor", 0, 0, 1, 2, 2, 0], //Emajor
+		["Fmajor", 1, 1, 2, 3, "x", "x"], //Fmajor
+		["Gmajor", 3, 3, 0, 0, 2, 3], //Gmajor
+		["Amajor", 0, 2, 2, 2, 0, "x"], //Amajor
+		
+		//minor
+		["Cminor", "x", 1, 0, 1, 3, "x"], //Cminor
+		["Dminor", 1, 3, 2, 0, "x", "x"], //Dminor
+		["Eminor", 0, 0, 0, 2, 2, 0], //Eminor
+		["Fminor", 1, 1, 1, 3, "x", "x"], //Fminor
+		["Gminor", 3, 3, 3, 0, "x", 3], //Gminor
+		["Aminor", 0, 1, 2, 2, "x", 1], //Aminor
+		
+		//sus4
+		["Csus4", "x", 1, 0, 3, 3, "x"], //Csus4
+		["Dsus4", 3, 3, 2, 0, "x", "x"], //Dsus4
+		["Esus4", 0, 0, 2, 2, 2, 0], //Esus4
+		["Fsus4", 1, 1, 3, 3, "x", "x"], //Fsus4
+		["Gsus4", 3, 3, 0, 0, 3, 3], //Gsus4
+		["Asus4", 0, 3, 2, 2, 0, "x"], //Asus4
+		
+		//sus2
+		["Csus2", "x", 1, 0, 0, 3, "x"], //Csus2
+		["Dsus2", 0, 3, 2, 0, "x", "x"], //Dsus2
+		["Esus2", 2, 0, "x", 2, 2, 0], //Esus2
+		["Fsus2", 1, 1, 0, 3, "x", "x"], //Fsus2
+		["Gsus2", 3, 3, 0, 0, 0, 3], //Gsus2
+		["Asus2", 0, 0, 2, 2, 0, "x"], //Asus2
+		
+		
+	]; 
+	
+    
+    	console.log (NTab);
+	//alert(NTab);
+	//alert(NTab[2]);
+	
+	$( ".NTabPushClass" ).click(function() {
+	
+	//Clear all
+	
+	$(".TabNote").html("");
+	
+	//Get the Var z.B Am
+	var thisNtab = $( this ).html();
+	
+		$.each( NTab, function( key, value ) {
+		
+	  		if(value[0] == thisNtab ){ // Button Value mit Array Vergleichen
+	  			//alert( key + ": " + value );
+	  			
+ 	  			var NTabe = "e" + value[1];
+ 	  			var NTabh = "h" + value[2];
+ 	  			var NTabg = "g" + value[3];
+ 	  			var NTabD = "D" + value[4];
+ 	  			var NTabA = "A" + value[5];
+ 	  			var NTabE = "E" + value[6];
+	  			
+	  			//alert(NTabe);
+
+	  			$(".TabNote[data-TabNumber='" + NTabe + "'] ").html("•");
+	  			$(".TabNote[data-TabNumber='" + NTabh + "'] ").html("•");
+	  			$(".TabNote[data-TabNumber='" + NTabg + "'] ").html("•");
+	  			$(".TabNote[data-TabNumber='" + NTabD + "'] ").html("•");
+	  			$(".TabNote[data-TabNumber='" + NTabA + "'] ").html("•");
+	  			$(".TabNote[data-TabNumber='" + NTabE + "'] ").html("•");
+	  			
+	  			
+	  			if(NTabe == "ex"){
+	  			$(".TabNote[data-TabNumber='e1'] ").html("x");
+	  			}
+	  			if(NTabh == "hx"){
+	  			$(".TabNote[data-TabNumber='h1'] ").html("x");
+	  			}
+	  			if(NTabg == "gx"){
+	  			$(".TabNote[data-TabNumber='g1'] ").html("x");
+	  			}
+	  			if(NTabD == "Dx"){
+	  			$(".TabNote[data-TabNumber='D1'] ").html("x");
+	  			}
+	  			if(NTabA == "Ax"){
+	  			$(".TabNote[data-TabNumber='A1'] ").html("x");
+	  			}
+	  			if(NTabE == "Ex"){
+	  			$(".TabNote[data-TabNumber='E1'] ").html("x");
+	  			}
+	  			
+	  			$(".TabName").html(value[0]);
+	  		}
+	  		
+		});
+  		//alert(NTab);
+  			//$( this ).html("•");
+  		
+	});
+
+    
+});
+
+</script>
+
+</head>
+<body>
+
+<div id="centerholder">
+<div id="accordion-resizer" class="ui-widget-content">
+<div id="accordion">
+  <h3>Chords Beginner</h3>
+  <div>
+    <div class="TabName">Chords Beginner</div>
+	<br style="clear:both"/>
+
+
+	<button id="NTabPush" class="NTabPushClass" value="Em"/>Em</button>
+	<button id="NTabPush" class="NTabPushClass" value="Am"/>Am</button>
+	<button id="NTabPush" class="NTabPushClass" value="Dm"/>Dm</button>
+
+	<button id="NTabPush" class="NTabPushClass" value="G"/>G</button>
+	<button id="NTabPush" class="NTabPushClass" value="C"/>C</button>
+
+	<br style="clear:both"/>
+
+	<button id="NTabPush" class="NTabPushClass" value="E"/>E</button>
+	<button id="NTabPush" class="NTabPushClass" value="A"/>A</button>
+	<button id="NTabPush" class="NTabPushClass" value="D"/>D</button>
+	<button id="NTabPush" class="NTabPushClass" value="G7"/>G7</button>
+	<button id="NTabPush" class="NTabPushClass" value="C7"/>C7</button>
+
+	<br style="clear:both"/>
+
+	<button id="NTabPush" class="NTabPushClass" value="E7"/>E7</button>
+	<button id="NTabPush" class="NTabPushClass" value="A7"/>A7</button>
+	<button id="NTabPush" class="NTabPushClass" value="D7"/>D7</button>
+	<button id="NTabPush" class="NTabPushClass" value="Gvar"/>Gvar</button>
+	<button id="NTabPush" class="NTabPushClass" value="B7"/>B7</button>
+
+	<br style="clear:both"/>
+  </div>
+  <h3>Chords Basics</h3>
+  <div>
+  <div class="TabName">Chords Basics</div>
+  	<br style="clear:both"/>
+  
+    	<button id="NTabPush" class="NTabPushClass" value="A"/>A</button>
+	<button id="NTabPush" class="NTabPushClass" value="B"/>B</button>
+	<button id="NTabPush" class="NTabPushClass" value="C"/>C</button>
+	<button id="NTabPush" class="NTabPushClass" value="D"/>D</button>
+	<button id="NTabPush" class="NTabPushClass" value="E"/>E</button>
+	<button id="NTabPush" class="NTabPushClass" value="F"/>F</button>
+	<button id="NTabPush" class="NTabPushClass" value="G"/>G</button>
+
+	<br style="clear:both"/>
+	<br/>
+	
+	<button id="NTabPush" class="NTabPushClass" value="a"/>a</button>
+	<button id="NTabPush" class="NTabPushClass" value="b"/>b</button>
+	<button id="NTabPush" class="NTabPushClass" value="c"/>c</button>
+	<button id="NTabPush" class="NTabPushClass" value="d"/>d</button>
+	<button id="NTabPush" class="NTabPushClass" value="e"/>e</button>
+	<button id="NTabPush" class="NTabPushClass" value="f"/>f</button>
+	<button id="NTabPush" class="NTabPushClass" value="g"/>g</button>
+
+	<br style="clear:both"/>
+  </div>
+    <h3>Chords Sorted</h3>
+  <div>
+  <div class="TabName">Chords Sorted</div>
+  	<br style="clear:both"/>
+  
+    	<button id="NTabPush" class="NTabPushClass" value="Cmajor"/>Cmajor</button>
+	<button id="NTabPush" class="NTabPushClass" value="Dmajor"/>Dmajor</button>
+	<button id="NTabPush" class="NTabPushClass" value="Emajor"/>Emajor</button>
+	<button id="NTabPush" class="NTabPushClass" value="Fmajor"/>Fmajor</button>
+	<button id="NTabPush" class="NTabPushClass" value="Gmajor"/>Gmajor</button>
+	<button id="NTabPush" class="NTabPushClass" value="Amajor"/>Amajor</button>
+
+	<br style="clear:both"/>
+	
+	
+	<button id="NTabPush" class="NTabPushClass" value="Cminor"/>Cminor</button>
+	<button id="NTabPush" class="NTabPushClass" value="Dminor"/>Dminor</button>
+	<button id="NTabPush" class="NTabPushClass" value="Eminor"/>Eminor</button>
+	<button id="NTabPush" class="NTabPushClass" value="Fminor"/>Fminor</button>
+	<button id="NTabPush" class="NTabPushClass" value="Gminor"/>Gminor</button>
+	<button id="NTabPush" class="NTabPushClass" value="Aminor"/>Aminor</button>
+
+	<br style="clear:both"/>
+	
+	<button id="NTabPush" class="NTabPushClass" value="Csus4"/>Csus4</button>
+	<button id="NTabPush" class="NTabPushClass" value="Dsus4"/>Dsus4</button>
+	<button id="NTabPush" class="NTabPushClass" value="Esus4"/>Esus4</button>
+	<button id="NTabPush" class="NTabPushClass" value="Fsus4"/>Fsus4</button>
+	<button id="NTabPush" class="NTabPushClass" value="Gsus4"/>Gsus4</button>
+	<button id="NTabPush" class="NTabPushClass" value="Asus4"/>Asus4</button>
+
+	<br style="clear:both"/>
+	
+	<button id="NTabPush" class="NTabPushClass" value="Csus2"/>Csus2</button>
+	<button id="NTabPush" class="NTabPushClass" value="Dsus2"/>Dsus2</button>
+	<button id="NTabPush" class="NTabPushClass" value="Esus2"/>Esus2</button>
+	<button id="NTabPush" class="NTabPushClass" value="Fsus2"/>Fsus2</button>
+	<button id="NTabPush" class="NTabPushClass" value="Gsus2"/>Gsus2</button>
+	<button id="NTabPush" class="NTabPushClass" value="Asus2"/>Asus2</button>
+
+	<br style="clear:both"/>
+
+  </div>
+  
+</div>
+
+</div>
+
+
+
+<br/>
+
+<center><button id="NTabClear" class="NTabClear" value="Clear"/>Clear</button></center>
+
+<br/><br/>
+
+
+
+<!-- Seiten Nummer -->
+<div id="SeitenTitel0">0</div>
+<div id="SeitenNumber" class="SNC">1</div>
+<div id="SeitenNumber" class="SNC">2</div>
+<div id="SeitenNumber" class="SNC">3</div>
+<div id="SeitenNumber" class="SNC">4</div>
+<div id="SeitenNumber" class="SNC">5</div>
+<div id="SeitenNumber" class="SNC">6</div>
+<div id="SeitenNumber" class="SNC">7</div>
+<div id="SeitenNumber" class="SNC">8</div>
+<div id="SeitenNumber" class="SNC">9</div>
+<div id="SeitenNumber" class="SNC">10</div>
+<div id="SeitenNumber" class="SNC">11</div>
+<div id="SeitenNumber" class="SNC">12</div>
+<div id="SeitenNumber" class="SNC">13</div>
+<div id="SeitenNumber" class="SNC">14</div>
+<div id="SeitenNumber" class="SNC">15</div>
+<div id="SeitenNumber" class="SNC">16</div>
+<div id="SeitenNumber" class="SNC">17</div>
+<div id="SeitenNumber" class="SNC">18</div>
+<div id="SeitenNumber" class="SNC">19</div>
+<div id="SeitenNumber" class="SNC">20</div>
+
+
+<br style="claer:both;"/>
+
+<!-- e -->
+<div id="SeitenTitel">e</div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e1"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e2"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e3"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e4"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e5"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e6"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e7"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e8"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e9"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e10"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e11"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e12"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e13"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e14"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e15"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e16"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e17"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e18"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e19"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="e20"></div>
+
+<div id="SeitenNoteX" class="TabVar" data-TabVar="e" style="border: none;">X</div>
+
+<br style="claer:both;"/>
+
+
+<!-- h -->
+<div id="SeitenTitel">h</div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h1"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h2"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h3"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h4"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h5"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h6"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h7"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h8"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h9"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h10"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h11"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h12"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h13"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h14"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h15"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h16"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h17"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h18"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h19"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="h20"></div>
+
+<div id="SeitenNoteX" class="TabVar" data-TabVar="h" style="border: none;">X</div>
+
+<br style="claer:both;"/>
+
+<!-- g -->
+<div id="SeitenTitel">g</div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g1"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g2"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g3"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g4"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g5"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g6"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g7"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g8"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g9"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g10"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g11"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g12"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g13"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g14"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g15"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g16"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g17"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g18"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g19"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="g20"></div>
+
+<div id="SeitenNoteX" class="TabVar" data-TabVar="g" style="border: none;">X</div>
+
+<br style="claer:both;"/>
+
+
+<!-- D -->
+<div id="SeitenTitel">D</div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D1"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D2"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D3"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D4"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D5"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D6"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D7"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D8"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D9"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D10"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D11"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D12"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D13"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D14"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D15"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D16"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D17"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D18"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D19"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="D20"></div>
+
+<div id="SeitenNoteX" class="TabVar" data-TabVar="D" style="border: none;">X</div>
+
+<br style="claer:both;"/>
+
+<!-- A -->
+<div id="SeitenTitel">A</div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A1"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A2"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A3"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A4"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A5"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A6"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A7"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A8"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A9"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A10"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A11"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A12"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A13"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A14"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A15"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A16"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A17"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A18"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A19"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="A20"></div>
+
+<div id="SeitenNoteX" class="TabVar" data-TabVar="A" style="border: none;">X</div>
+
+<br style="claer:both;"/>
+
+
+<!-- E -->
+<div id="SeitenTitel">E</div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E1"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E2"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E3"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E4"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E5"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E6"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E7"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E8"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E9"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E10"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E11"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E12"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E13"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E14"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E15"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E16"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E17"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E18"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E19"></div>
+<div id="SeitenNote" class="TabNote" data-TabNumber="E20"></div>
+
+<div id="SeitenNoteX" class="TabVar" data-TabVar="E" style="border: none;">X</div>
+
+<br style="claer:both;"/>
+
+
+<!-- Punkte -->
+<div id="SeitenTitel"></div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber">•</div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber">•</div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber">•</div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber">• •</div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber">•</div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber"></div>
+<div id="SeitenNumber"></div>
+
+<br style="claer:both;"/>
+
+</div>
+<br/><br/><br/>
+
+</body>
+</html>
